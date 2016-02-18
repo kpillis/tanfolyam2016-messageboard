@@ -49,10 +49,15 @@ var loadPosts = function() {
         success: function(data){
             $("#posts").empty();
             $.each(data, function(index, item) {
-                var listElement = $('<li>').text(item.name + ": " + item.message);
+                var listElement = $('<li style="display: none;">').text(item.name + ": " + item.message);
                 $('<hr>').appendTo(listElement);
                 $('<span class="badge">').text(item.likes).appendTo(listElement);
                 listElement.prependTo($('#posts'));        
+                if(index == data.length-1){
+                    listElement.show('slow');
+                }else{
+                    listElement.show();        
+                }
             });
         }
     });
