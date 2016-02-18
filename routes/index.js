@@ -5,6 +5,7 @@ var listPosts = require('../middleware/listPosts');
 var addPost = require('../middleware/addPost');
 var likePost = require('../middleware/likePost');
 var commentOnPost = require('../middleware/commentOnPost');
+var deletePost = require('../middleware/deletePost');
 
 
 /* GET home page. */
@@ -19,6 +20,8 @@ router.post('/board/add', addPost);
 router.put('/board/like/:postId', likePost);
 
 router.put('/board/comment/:postId', commentOnPost);
+
+router.delete('/board/delete/:postId', deletePost);
 
 
 module.exports = router;
