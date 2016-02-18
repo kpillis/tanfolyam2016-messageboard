@@ -4,9 +4,9 @@ module.exports = function (req, res, next) {
     var postId = req.params.postId;
 
     var posts = myModule.posts;
-    for(i=0; i < posts.length; i++){
+    for(i=posts.length-1; i >= 0; i--){
         if(posts[i].id == postId){
-            posts[i].likes++;
+            posts.splice(i,1);
         }
     }
 
