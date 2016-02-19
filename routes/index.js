@@ -17,9 +17,9 @@ router.get('/board', listPosts);
 
 router.post('/board/add', addPost);
 
-router.put('/board/like/:postId', likePost);
+router.post('/board/like', likePost);
 
-router.put('/board/comment/:postId', commentOnPost);
+router.post('/board/comment', commentOnPost);
 
 router.delete('/board/delete/:postId', deletePost);
 

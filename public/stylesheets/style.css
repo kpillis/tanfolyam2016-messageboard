@@ -5,6 +5,10 @@ body {
   background-color: #eee;
 }
 
+.btn-mine {
+    background: #F37149;
+    color: #ffffff;
+}
 .container {
   width: 520px;
   margin-top: 20px;
@@ -48,4 +52,20 @@ body {
 
 .navbar-default{
     background: rgba(255, 255, 255, 0.90);
+}
+
+.username {
+    padding-bottom: 10px;
+}
+
+.indicator {
+    padding-left: 2px;
+    padding-right: 5px;
+}
+
+.indicators {
+    border-radius: 25px;
+    display: inline-block;
+    padding: 5px;
+    border: 2px solid #F37149;
 }

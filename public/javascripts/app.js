@@ -1,20 +1,64 @@
-var main = function() {
-    $('#send_btn').click(function() {
-        var name = $('#name_field').val();
-        var message = $('#message_field').val();
-        var data = {};
-        data.name = name;
-        data.message = message;
 
-        $.ajax({
-            url: "/board/add",
-            method: "POST",
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            success: loadPosts
-        }).done(clearForm)
-    });
+(function () {
+    var app = angular.module('messageBoard', ['ngRoute','ngAnimate']).config(['$locationProvider', function ($locationProvider) {
+	$locationProvider.html5Mode(true);
+    }]);
   
+
+	app.controller('PostController', function ($scope, $route, $routeParams, $location, $http) {
+    	
+    	$http.get('board').
+            success(function (data) {
+            $scope.posts = data;
+        });
+
+        $scope.addNewPost = function (name, message) {
+            var data = {};
+            data.name = name;
+            data.message = message;
+            $http.post('board/add', JSON.stringify(data)).
+                success($scope.update);
+            clearForm();
+        }
+
+        $scope.update = function () {
+            $http.get('board').
+                success(function (data) {
+                $scope.posts = data;
+            });
+        };
+
+        $scope.commentOnPost = function (postId, comment) {
+            var data = JSON.stringify({postId: postId, comment:comment});
+            $http.post('board/comment', data).
+                success($scope.update);
+        }
+
+        $scope.likePost = function (postId) {
+            var data = JSON.stringify({postId: postId});
+            $http.post('board/like', data).
+                success($scope.update);
+        }
+
+    	$scope.data = {
+            repeatSelect: null,
+       	    availableOptions: []
+    	};
+  });
+})();
+
+
+
+
+var clearForm = function() {
+    $('#name_field').val('');
+    $('#message_field').val('');
+    $('.counter').text('140');
+    $('.btn').addClass('disabled');
+}
+
+var main = function() {
+
   $('#message_field').keyup(function() {
     var postLength = $(this).val().length;
     var charactersLeft = 140 - postLength;
@@ -32,35 +76,6 @@ var main = function() {
   });
   
   $('.btn').addClass('disabled');
-  loadPosts();
-}
-
-var clearForm = function() {
-    $('#name_field').val('');
-    $('#message_field').val('');
-    $('.counter').text('140');
-    $('.btn').addClass('disabled');
-}
-
-var loadPosts = function() {
-    $.ajax({
-        method: "GET",
-        url: "/board",
-        success: function(data){
-            $("#posts").empty();
-            $.each(data, function(index, item) {
-                var listElement = $('<li style="display: none;">').text(item.name + ": " + item.message);
-                $('<hr>').appendTo(listElement);
-                $('<span class="badge">').text(item.likes).appendTo(listElement);
-                listElement.prependTo($('#posts'));        
-                if(index == data.length-1){
-                    listElement.show('slow');
-                }else{
-                    listElement.show();        
-                }
-            });
-        }
-    });
 }
 
 $(document).ready(main);
