@@ -11,6 +11,12 @@
             success(function (data) {
             $scope.posts = data;
         });
+        
+    
+      	$scope.clearForm = function() {
+    	    $scope.name = null;
+    	    $scope.message = null;
+	} 
 
         $scope.addNewPost = function (name, message) {
             var data = {};
@@ -18,7 +24,7 @@
             data.message = message;
             $http.post('board/add', JSON.stringify(data)).
                 success($scope.update);
-            clearForm();
+            $scope.clearForm();
         }
 
         $scope.update = function () {
@@ -50,32 +56,7 @@
 
 
 
-var clearForm = function() {
-    $('#name_field').val('');
-    $('#message_field').val('');
-    $('.counter').text('140');
-    $('.btn').addClass('disabled');
-}
 
-var main = function() {
 
-  $('#message_field').keyup(function() {
-    var postLength = $(this).val().length;
-    var charactersLeft = 140 - postLength;
-    $('.counter').text(charactersLeft);
-  
-    if(charactersLeft < 0) {
-      $('.btn').addClass('disabled'); 
-    }
-    else if(charactersLeft == 140) {
-      $('.btn').addClass('disabled');
-    }
-    else {
-      $('.btn').removeClass('disabled');
-    }
-  });
-  
-  $('.btn').addClass('disabled');
-}
 
-$(document).ready(main);
+

@@ -5,11 +5,6 @@ body {
   background-color: #eee;
 }
 
-.btn-mine {
-    background: #F37149;
-    color: #ffffff;
-}
-
 .button-group {
   margin-bottom: 20px;
 }
@@ -64,4 +59,33 @@ body {
     display: inline-block;
     padding: 5px;
     border: 2px solid #F37149;
+}
+
+
+input[type="textarea"]:focus{   
+    border-color: hsla(14,88%,70%,0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px hsla(14,88%,70%,0.8);
+    outline: 0 none;
+}
+
+.btn-primary {
+    background: #f37149;
+    color: #ffffff;
+    border-color: #f37149;
+}
+ 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #e36139;
+    border-color: #f37149;
+}
+ 
+.btn-primary:active, .btn-primary.active, .btn-primary:active:hover, .btn-primary:active:focus {
+    background: #d35129;
+    box-shadow: none;
+    border-color: #f37149;
+}
+
+.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled].focus, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+background: #d35129;
+border-color: #f37149;
 }

@@ -33,8 +33,8 @@
         </div>
       </form>
       <div class="button-group pull-right">
-        <p class="counter">140</p>
-        <a href="#" ng-click="addNewPost(name,message)" class="btn btn-mine">Post</a>
+          <p class="counter">{{140-message.length}}</p>
+          <a href="#" ng-disabled="!(!!name && !!message && message.length <= 140)" id="postBtn" ng-click="!(!!name && !!message && message.length <= 140) || addNewPost(name,message)" class="btn btn-primary">Post</a>
       </div>
 
       <ul id="posts" class="posts">
@@ -58,7 +58,7 @@
             </div>
                 <div class="input-group">
                     <input type = "textarea" class="form-control custom-control" rows="3" style="resize:none" placeholder="Write a comment." ng-model="comment">
-                    <a ng-click="commentOnPost(post.id,comment);comment = null" class="input-group-addon btn btn-primary">Send</a>
+                    <a ng-disabled="!(!!comment)" ng-click="!(!!comment) || commentOnPost(post.id,comment);comment = null" class="input-group-addon btn btn-primary">Send</a>
                 </div>
 	</li> 
       </ul>
